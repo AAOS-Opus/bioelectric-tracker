@@ -42,6 +42,8 @@ export const config = {
     '/phases/:path*',
     '/products/:path*',
     '/modalities/:path*',
+    '/settings/:path*',
+    '/settings',
     '/onboarding/:path*',
     '/onboarding'
   ]
