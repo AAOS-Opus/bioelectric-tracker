@@ -3,7 +3,7 @@
 import { memo } from 'react';
 import { UserProgressData } from '@/hooks/useUserProgress';
 import { FetchError } from '@/lib/fetcher';
-import { BarChart3, AlertCircle, AlertTriangle, Award, TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { BarChart3, AlertCircle, AlertTriangle, Award, TrendingUp, TrendingDown, Minus, Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface ProgressSummaryCardProps {
@@ -60,16 +60,37 @@ export const ProgressSummaryCard = memo(function ProgressSummaryCard({ data, isL
 
   if (!data) {
     return (
-      <div className="bg-gray-800/50 backdrop-blur-xl rounded-xl border border-gray-700/50 p-6">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-8 h-8 bg-gray-700/50 rounded-lg flex items-center justify-center">
-            <BarChart3 className="h-4 w-4 text-gray-400" />
+      <div className="bg-gray-800/50 backdrop-blur-xl rounded-xl border border-gray-700/50 p-6 transition-all duration-200 hover:border-purple-500/30">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+              <BarChart3 className="h-4 w-4 text-white" />
+            </div>
+            <h3 className="text-lg font-semibold text-white">Your Progress</h3>
           </div>
-          <h3 className="text-lg font-semibold text-white">Your Progress</h3>
         </div>
-        <p className="text-gray-400 text-sm">
-          No progress data available yet. Start your journey!
-        </p>
+
+        <div className="text-center py-8">
+          <div className="w-12 h-12 bg-gray-700/50 rounded-lg mx-auto mb-3 flex items-center justify-center">
+            <TrendingUp className="h-6 w-6 text-purple-400" />
+          </div>
+          <h4 className="text-white font-medium mb-1">
+            Your progress story starts here
+          </h4>
+          <p className="text-gray-400 text-sm mb-4">
+            Log your first session or biomarker to begin tracking
+          </p>
+          <button className={cn(
+            "text-sm font-medium px-4 py-2 rounded-lg transition-all",
+            "text-purple-400 bg-purple-900/30 hover:bg-purple-900/50 hover:text-purple-300",
+            "focus:outline-none focus:ring-2 focus:ring-purple-500"
+          )}>
+            <span className="flex items-center gap-2">
+              <Plus className="h-4 w-4" />
+              Start tracking
+            </span>
+          </button>
+        </div>
       </div>
     );
   }
