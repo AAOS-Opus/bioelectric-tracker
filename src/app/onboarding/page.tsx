@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { Loader2, ChevronRight, ChevronLeft, Check, Zap, Shield, Heart, Star } from 'lucide-react';
+import { Loader2, ChevronRight, ChevronLeft, Check, Zap, Shield, Heart, Star, Eye, EyeOff } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // Phase data matching the API
@@ -47,6 +47,8 @@ type WizardStep = 'welcome' | 'phase' | 'preferences' | 'complete';
 interface OnboardingFormData {
   name: string;
   email: string;
+  password: string;
+  confirmPassword: string;
   currentPhaseNumber: 1 | 2 | 3 | 4;
   preferences: {
     notifications: {
@@ -69,6 +71,8 @@ export default function OnboardingPage() {
   const [formData, setFormData] = useState<OnboardingFormData>({
     name: '',
     email: '',
+    password: '',
+    confirmPassword: '',
     currentPhaseNumber: 1,
     preferences: {
       notifications: {
@@ -131,6 +135,19 @@ export default function OnboardingPage() {
           return;
         }
       }
+      // Validate password
+      if (!formData.password) {
+        setError('Please enter a password');
+        return;
+      }
+      if (formData.password.length < 8) {
+        setError('Password must be at least 8 characters');
+        return;
+      }
+      if (formData.password !== formData.confirmPassword) {
+        setError('Passwords do not match');
+        return;
+      }
       await saveWizardProgress('preferences', { preferences: formData.preferences });
       setCurrentStep('complete');
     }
@@ -153,6 +170,7 @@ export default function OnboardingPage() {
         body: JSON.stringify({
           name: formData.name.trim(),
           email: formData.email.trim().toLowerCase(),
+          password: formData.password,
           currentPhaseNumber: formData.currentPhaseNumber,
           preferences: formData.preferences
         })
@@ -466,6 +484,9 @@ interface PreferencesStepProps {
 }
 
 function PreferencesStep({ formData, onChange, sessionEmail }: PreferencesStepProps) {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   return (
     <div>
       <div className="text-center mb-6">
@@ -513,6 +534,65 @@ function PreferencesStep({ formData, onChange, sessionEmail }: PreferencesStepPr
             />
           </div>
         )}
+
+        {/* Password */}
+        <div>
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            Password *
+          </label>
+          <div className="relative">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              value={formData.password}
+              onChange={(e) => onChange({ password: e.target.value })}
+              placeholder="Create a password (min 8 characters)"
+              className={cn(
+                'w-full px-4 py-3 pr-12 bg-gray-900/50 border border-gray-700 rounded-lg',
+                'text-white placeholder-gray-500',
+                'focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent'
+              )}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-300"
+            >
+              {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+            </button>
+          </div>
+          <p className="mt-1 text-xs text-gray-500">Must be at least 8 characters</p>
+        </div>
+
+        {/* Confirm Password */}
+        <div>
+          <label className="block text-sm font-medium text-gray-300 mb-2">
+            Confirm Password *
+          </label>
+          <div className="relative">
+            <input
+              type={showConfirmPassword ? 'text' : 'password'}
+              value={formData.confirmPassword}
+              onChange={(e) => onChange({ confirmPassword: e.target.value })}
+              placeholder="Confirm your password"
+              className={cn(
+                'w-full px-4 py-3 pr-12 bg-gray-900/50 border border-gray-700 rounded-lg',
+                'text-white placeholder-gray-500',
+                'focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent',
+                formData.confirmPassword && formData.password !== formData.confirmPassword && 'border-red-500'
+              )}
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-300"
+            >
+              {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+            </button>
+          </div>
+          {formData.confirmPassword && formData.password !== formData.confirmPassword && (
+            <p className="mt-1 text-xs text-red-400">Passwords do not match</p>
+          )}
+        </div>
 
         {/* Notifications */}
         <div>
