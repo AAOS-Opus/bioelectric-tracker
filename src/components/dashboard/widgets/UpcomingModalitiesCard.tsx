@@ -178,7 +178,7 @@ export const UpcomingModalitiesCard = memo(function UpcomingModalitiesCard({
                     </p>
                   )}
                 </div>
-                <button className="text-purple-400 hover:text-purple-300 p-1 transition-colors">
+                <button className="text-purple-400 hover:text-purple-300 p-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400">
                   <ChevronRight className="h-4 w-4" />
                 </button>
               </div>

@@ -404,7 +404,7 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
           <button
             type="button"
             onClick={() => formatText('bold')}
-            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400"
             title="Bold"
           >
             <strong>B</strong>
@@ -412,7 +412,7 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
           <button
             type="button"
             onClick={() => formatText('italic')}
-            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400"
             title="Italic"
           >
             <em>I</em>
@@ -420,7 +420,7 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
           <button
             type="button"
             onClick={() => formatText('insertUnorderedList')}
-            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400"
             title="Bullet List"
           >
             •
@@ -428,7 +428,7 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
           <button
             type="button"
             onClick={() => formatText('insertOrderedList')}
-            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400"
             title="Numbered List"
           >
             1.
@@ -436,7 +436,7 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
           <button
             type="button"
             onClick={() => formatText('undo')}
-            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400"
             title="Undo"
           >
             ↶
@@ -444,7 +444,7 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
           <button
             type="button"
             onClick={() => formatText('redo')}
-            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400"
             title="Redo"
           >
             ↷
@@ -455,7 +455,7 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
             <button
               type="button"
               onClick={() => setShowEmojiPanel(!showEmojiPanel)}
-              className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              className="p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400"
               title="Add Emoji"
             >
               😊
@@ -468,7 +468,7 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
                       key={emoji}
                       type="button"
                       onClick={() => insertEmoji(emoji)}
-                      className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded text-lg"
+                      className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded text-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
                     >
                       {emoji}
                     </button>
@@ -576,7 +576,7 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
                       <button
                         type="button"
                         onClick={() => removeCustomBiomarker(biomarker.key)}
-                        className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 text-sm"
+                        className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 text-sm p-1 rounded focus:outline-none focus:ring-2 focus:ring-red-400"
                         title="Remove custom biomarker"
                       >
                         ✕
