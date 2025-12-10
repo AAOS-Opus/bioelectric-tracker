@@ -178,7 +178,7 @@ export default function ProductTracker({ className = '' }: ProductTrackerProps) 
               ));
               toast({ title: "Restored!", variant: 'success', duration: 2000 });
             }}
-            className="text-sm font-medium text-blue-600 hover:text-blue-700"
+            className="text-sm font-medium text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300"
           >
             Undo
           </button>
@@ -414,7 +414,7 @@ export default function ProductTracker({ className = '' }: ProductTrackerProps) 
           </p>
         </div>
         <div className="text-right">
-          <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
+          <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
             {dailyCompletion}%
           </div>
           <div className="text-xs text-gray-500 dark:text-gray-400">
@@ -435,7 +435,7 @@ export default function ProductTracker({ className = '' }: ProductTrackerProps) 
         </div>
         <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
           <div
-            className="bg-gradient-to-r from-indigo-500 to-purple-500 h-3 rounded-full transition-all duration-500 ease-out"
+            className="bg-gradient-to-r from-purple-500 to-purple-400 h-3 rounded-full transition-all duration-500 ease-out"
             style={{ width: `${dailyCompletion}%` }}
           ></div>
         </div>
@@ -475,7 +475,7 @@ export default function ProductTracker({ className = '' }: ProductTrackerProps) 
                   <button
                     onClick={() => handleTakeAllGroup(group.key)}
                     disabled={loggingProduct === `batch-${group.key}`}
-                    className="px-3 py-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 bg-indigo-50 dark:bg-indigo-900/30 rounded-md hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-colors disabled:opacity-50"
+                    className="px-3 py-2 text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 bg-purple-50 dark:bg-purple-900/30 rounded-lg hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-colors disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   >
                     {loggingProduct === `batch-${group.key}` ? (
                       <span className="flex items-center gap-2">

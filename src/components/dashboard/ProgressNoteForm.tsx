@@ -73,6 +73,9 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
   const customBiomarkersKey = `custom-biomarkers-${userId}`;
   const lastValuesKey = `last-biomarker-values-${userId}`;
 
+  // Loading state
+  const [isLoading, setIsLoading] = useState(true);
+
   // Load saved data on mount
   useEffect(() => {
     try {
@@ -101,8 +104,13 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
       }
     } catch (error) {
       console.error('Failed to load saved data:', error);
+    } finally {
+      // Small delay to prevent flash if loading is instant
+      setTimeout(() => setIsLoading(false), 500);
     }
   }, [draftKey, customBiomarkersKey, lastValuesKey]);
+
+
 
   // Auto-save functionality
   const saveToLocalStorage = useCallback(() => {
@@ -144,6 +152,58 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
       localStorage.setItem(customBiomarkersKey, JSON.stringify(customBiomarkers));
     }
   }, [customBiomarkers, customBiomarkersKey]);
+
+  if (isLoading) {
+    return (
+      <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 ${className}`}>
+        <div className="animate-pulse">
+          {/* Header Skeleton */}
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+            <div>
+              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-48 mb-2"></div>
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-64"></div>
+            </div>
+          </div>
+
+          {/* Editor Skeleton */}
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-3">
+              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-32"></div>
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+            </div>
+            <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded-t-lg border-b border-gray-300 dark:border-gray-600"></div>
+            <div className="h-32 bg-gray-200 dark:bg-gray-700 rounded-b-lg"></div>
+          </div>
+
+          {/* Sliders Skeleton */}
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-4">
+              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-40"></div>
+              <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-32"></div>
+            </div>
+            <div className="space-y-4">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-gray-200 dark:bg-gray-600 rounded"></div>
+                      <div className="h-5 bg-gray-200 dark:bg-gray-600 rounded w-24"></div>
+                    </div>
+                    <div className="h-8 w-8 bg-gray-200 dark:bg-gray-600 rounded"></div>
+                  </div>
+                  <div className="h-2 bg-gray-200 dark:bg-gray-600 rounded-full w-full"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Button Skeleton */}
+          <div className="h-14 bg-gray-200 dark:bg-gray-700 rounded-lg w-full"></div>
+        </div>
+      </div>
+    );
+  }
 
   const updateWordCount = (text: string) => {
     const plainText = text.replace(/<[^>]*>/g, '').trim();
@@ -314,7 +374,7 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
     <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow duration-200 ${className}`}>
       {/* Header */}
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-xl flex items-center justify-center">
+        <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center">
           <span className="text-2xl">✒️</span>
         </div>
         <div>
@@ -424,7 +484,7 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
           ref={editorRef}
           contentEditable
           onInput={handleEditorInput}
-          className="min-h-32 p-4 border border-t-0 border-gray-200 dark:border-gray-600 rounded-b-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="min-h-32 p-4 border border-t-0 border-gray-200 dark:border-gray-600 rounded-b-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
           style={{ whiteSpace: 'pre-wrap' }}
           data-placeholder="Today I noticed..."
         />
@@ -439,7 +499,7 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
           <button
             type="button"
             onClick={() => setShowCustomBiomarkerForm(!showCustomBiomarkerForm)}
-            className="px-3 py-1 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 bg-blue-50 dark:bg-blue-900/30 rounded-md hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors"
+            className="px-3 py-1 text-sm text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 bg-purple-50 dark:bg-purple-900/30 rounded-lg hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500"
           >
             ➕ Add Biomarker
           </button>
@@ -462,12 +522,12 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
                 onChange={(e) => setNewBiomarkerName(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && addCustomBiomarker()}
                 placeholder="Enter biomarker name (e.g., Hydration, Focus)"
-                className="flex-1 px-3 py-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="flex-1 px-3 py-1 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               />
               <button
                 type="button"
                 onClick={addCustomBiomarker}
-                className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+                className="px-3 py-1 bg-gradient-to-r from-purple-600 to-purple-500 text-white rounded-lg hover:from-purple-500 hover:to-purple-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
               >
                 Add
               </button>
@@ -551,7 +611,7 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
       <button
         onClick={handleSubmit}
         disabled={isSubmitting}
-        className="w-full px-6 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg hover:from-blue-600 hover:to-purple-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-all duration-200 font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full px-6 py-4 bg-gradient-to-r from-purple-600 to-purple-500 text-white rounded-lg hover:from-purple-500 hover:to-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-all duration-200 font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isSubmitting ? (
           <span className="flex items-center justify-center gap-2">
