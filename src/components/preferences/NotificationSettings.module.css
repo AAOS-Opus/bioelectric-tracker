@@ -1,0 +1,137 @@
+/* NotificationSettings Component CSS */
+
+/* Notification Preview */
+.notificationPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 100%;
+  border-radius: 0.5rem;
+  background-color: #f8fafc;
+  padding: 1rem;
+}
+
+.notificationItem {
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  border-left: 4px solid;
+  border-color: #3b82f6; /* Blue medical theme default */
+}
+
+.notificationItem:nth-child(1) {
+  border-color: #3b82f6; /* Blue for alerts */
+}
+
+.notificationItem:nth-child(2) {
+  border-color: #10b981; /* Green for progress */
+}
+
+.notificationItem:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.notificationIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background-color: #eff6ff; /* Light blue background */
+  color: #3b82f6; /* Blue icon */
+  flex-shrink: 0;
+}
+
+.notificationItem:nth-child(1) .notificationIcon {
+  background-color: #eff6ff; /* Light blue background */
+  color: #3b82f6; /* Blue icon */
+}
+
+.notificationItem:nth-child(2) .notificationIcon {
+  background-color: #ecfdf5; /* Light green background */
+  color: #10b981; /* Green icon */
+}
+
+.notificationContent {
+  flex: 1;
+}
+
+.notificationTitle {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  color: #1e293b;
+}
+
+.notificationMessage {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+.notificationTime {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+/* Notification settings section */
+.channelSelection {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.priorityIndicator {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  margin-right: 0.5rem;
+}
+
+.priorityHigh {
+  background-color: #ef4444; /* Red */
+}
+
+.priorityMedium {
+  background-color: #f59e0b; /* Amber */
+}
+
+.priorityLow {
+  background-color: #10b981; /* Green */
+}
+
+/* Dark mode overrides */
+:global(.dark) .notificationPreview {
+  background-color: #0f172a;
+}
+
+:global(.dark) .notificationItem {
+  background-color: #1e293b;
+}
+
+:global(.dark) .notificationTitle {
+  color: #f8fafc;
+}
+
+:global(.dark) .notificationMessage {
+  color: #cbd5e1;
+}
+
+:global(.dark) .notificationTime {
+  color: #94a3b8;
+}
+
+:global(.dark) .notificationItem:nth-child(1) .notificationIcon {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+
+:global(.dark) .notificationItem:nth-child(2) .notificationIcon {
+  background-color: rgba(16, 185, 129, 0.2);
+}

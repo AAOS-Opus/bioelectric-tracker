@@ -1,0 +1,68 @@
+/* Theme Settings Component CSS */
+
+/* Color swatch display */
+.colorSwatch {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 9999px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.colorSwatch:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.colorSwatch::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color);
+  border-radius: inherit;
+}
+
+/* Apply the data-color attribute as a CSS variable */
+.colorSwatch[data-color] {
+  --color: attr(data-color);
+}
+
+/* Theme Preview Styles */
+.previewLight {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: white;
+  color: #1e293b;
+  font-family: var(--font-family, inherit);
+  font-size: calc(1rem * var(--font-scale, 1));
+}
+
+.previewDark {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: #1e293b;
+  color: #f8fafc;
+  font-family: var(--font-family, inherit);
+  font-size: calc(1rem * var(--font-scale, 1));
+}
+
+.previewHeader {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color, #1e40af);
+}
+
+.previewPrimaryBtn {
+  background-color: var(--primary-color, #1e40af) !important;
+  color: white !important;
+}
+
+.previewSecondaryBtn {
+  border-color: var(--secondary-color, #047857) !important;
+  color: var(--secondary-color, #047857) !important;
+}

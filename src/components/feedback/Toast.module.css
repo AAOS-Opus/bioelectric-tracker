@@ -1,0 +1,166 @@
+.toast {
+  display: flex;
+  align-items: flex-start;
+  max-width: 400px;
+  background-color: var(--surface);
+  color: var(--text-primary);
+  border-radius: 6px;
+  box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05));
+  margin-bottom: 16px;
+  pointer-events: auto;
+  overflow: hidden;
+  padding: 16px;
+  position: relative;
+  animation: slideIn var(--motion-base) var(--ease-out) forwards;
+  will-change: transform, opacity;
+}
+
+.noAnimation {
+  animation: none;
+}
+
+.exiting {
+  animation: slideOut var(--motion-base) var(--ease-in) forwards;
+}
+
+.iconContainer {
+  flex-shrink: 0;
+  margin-right: 12px;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statusIcon {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+}
+
+.info .statusIcon {
+  background-color: var(--status-info);
+}
+
+.success .statusIcon {
+  background-color: var(--status-success);
+}
+
+.warning .statusIcon {
+  background-color: var(--status-warning);
+}
+
+.error .statusIcon {
+  background-color: var(--status-error);
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  margin: 0;
+  padding: 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.actionButton {
+  align-self: flex-start;
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: var(--primary);
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color var(--motion-quick) var(--ease-out);
+}
+
+.actionButton:hover {
+  background-color: var(--primary-transparent);
+}
+
+.actionButton:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1.25rem;
+  opacity: 0.7;
+  transition: opacity var(--motion-quick) var(--ease-out),
+              background-color var(--motion-quick) var(--ease-out);
+}
+
+.closeButton:hover {
+  opacity: 1;
+  background-color: var(--surface-hover);
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  opacity: 1;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: fadeIn 0.1s ease forwards;
+  }
+  
+  .exiting {
+    animation: fadeOut 0.1s ease forwards;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+}

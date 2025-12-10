@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Mode - Core Colors */
+    --background: 39 38% 97%;
+    --foreground: 215 75% 20%;
+    --card: 39 38% 99%;
+    --card-foreground: 215 75% 20%;
+    --popover: 39 38% 99%;
+    --popover-foreground: 215 75% 20%;
+    --primary: 215 75% 20%;
+    --primary-foreground: 39 38% 97%;
+    --secondary: 215 30% 95%;
+    --secondary-foreground: 215 75% 20%;
+    --muted: 215 30% 93%;
+    --muted-foreground: 215 50% 35%;
+    --accent: 215 30% 95%;
+    --accent-foreground: 215 75% 20%;
+    --success: 142 72% 29%;
+    --success-foreground: 39 38% 97%;
+    --warning: 45 93% 47%;
+    --warning-foreground: 215 75% 20%;
+    --destructive: 0 84% 37%;
+    --destructive-foreground: 39 38% 97%;
+    --border: 215 30% 90%;
+    --input: 215 30% 90%;
+    --ring: 215 75% 20%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222 22% 18%;
+    --foreground: 39 38% 95%;
+    --card: 222 22% 22%;
+    --card-foreground: 39 38% 95%;
+    --popover: 222 22% 22%;
+    --popover-foreground: 39 38% 95%;
+    --primary: 215 50% 70%;
+    --primary-foreground: 222 22% 18%;
+    --secondary: 222 22% 25%;
+    --secondary-foreground: 39 38% 95%;
+    --muted: 222 22% 23%;
+    --muted-foreground: 39 38% 80%;
+    --accent: 215 50% 70%;
+    --accent-foreground: 222 22% 18%;
+    --success: 142 72% 35%;
+    --success-foreground: 39 38% 95%;
+    --warning: 45 93% 47%;
+    --warning-foreground: 222 22% 18%;
+    --destructive: 0 84% 43%;
+    --destructive-foreground: 39 38% 95%;
+    --border: 222 22% 28%;
+    --input: 222 22% 28%;
+    --ring: 215 50% 70%;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+
+  .input-base {
+    @apply bg-background text-foreground border-input transition-colors;
+    @apply focus:ring-2 focus:ring-primary/20 focus:border-primary/50;
+  }
+
+  .button-base {
+    @apply text-foreground transition-colors duration-200;
+    @apply hover:opacity-90 active:opacity-100;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/20;
+  }
+
+  .link-base {
+    @apply text-primary hover:text-primary/80 transition-colors;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/20;
+  }
+
+  .heading-base {
+    @apply font-medium text-foreground tracking-tight;
+  }
+}
+
+@layer utilities {
+  .loading {
+    @apply opacity-60 pointer-events-none;
+  }
+
+  .error-message {
+    @apply text-destructive text-sm mt-1;
+  }
+
+  .success-message {
+    @apply text-success text-sm mt-1;
+  }
+
+  .text-success {
+    color: hsl(var(--success));
+  }
+}

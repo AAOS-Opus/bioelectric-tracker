@@ -1,0 +1,11 @@
+/* Test-specific styles for visual analytics tests */
+
+.test-container-small {
+  width: 400px;
+}
+
+.test-container-medium {
+  width: 600px;
+}
+
+/* Add more test-specific styles as needed */

@@ -1,0 +1,56 @@
+.themeInspector {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.colorSwatch {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  background-color: var(--swatch-bg-color);
+}
+
+.selectedSwatch {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.swatchName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--swatch-text-color, inherit);
+}
+
+.swatchValue {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  color: var(--swatch-text-color, inherit);
+}
+
+.contrastItem {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+  background-color: var(--contrast-bg-color);
+}
+
+.contrastText {
+  font-size: 0.875rem;
+  color: var(--contrast-text-color, inherit);
+}
+
+.sectionTitle {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Dynamic classes that will be applied programmatically */
+.textLight {
+  color: #000000;
+}
+
+.textDark {
+  color: #FFFFFF;
+}

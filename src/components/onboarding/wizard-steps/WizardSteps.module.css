@@ -1,0 +1,79 @@
+.phaseProgressBar {
+  height: 0.5rem;
+  width: 100%;
+  border-radius: 9999px;
+}
+
+.phaseBorderLeft {
+  border-left-width: 4px;
+}
+
+.chartBar {
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+
+.dashboardPreviewContainer {
+  height: 16rem;
+  background-image: linear-gradient(to right, var(--medical-blue-50), var(--medical-green-50));
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid var(--medical-blue-100);
+  margin-bottom: 1.5rem;
+}
+
+/* Progress styles */
+.progress {
+  height: 100%;
+  border-radius: 9999px;
+}
+
+.progressWidth35 {
+  width: 35%;
+}
+
+/* Dynamic width classes for phase progress bars */
+.phaseWidth10 { width: 10%; }
+.phaseWidth20 { width: 20%; }
+.phaseWidth30 { width: 30%; }
+.phaseWidth40 { width: 40%; }
+.phaseWidth50 { width: 50%; }
+.phaseWidth60 { width: 60%; }
+.phaseWidth67 { width: 67%; }
+.phaseWidth70 { width: 70%; }
+.phaseWidth80 { width: 80%; }
+.phaseWidth90 { width: 90%; }
+.phaseWidth100 { width: 100%; }
+
+/* Phase color classes */
+.phaseColorMedicalBlue { background-color: var(--medical-blue-500); }
+.phaseColorMedicalGreen { background-color: var(--medical-green-500); }
+.phaseColorMedicalOrange { background-color: var(--medical-orange-500); }
+.phaseColorMedicalPurple { background-color: var(--medical-purple-500); }
+
+/* Phase card styles */
+.phaseCard {
+  overflow: hidden;
+  border-left-width: 4px;
+}
+
+/* Chart bar styles */
+.chartBar {
+  width: 10%;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+
+.chartBarHeight35 { height: 35%; }
+.chartBarHeight42 { height: 42%; }
+.chartBarHeight28 { height: 28%; }
+.chartBarHeight50 { height: 50%; }
+.chartBarHeight60 { height: 60%; }
+.chartBarHeight55 { height: 55%; }
+.chartBarHeight65 { height: 65%; }
+
+@media (min-width: 768px) {
+  .dashboardPreviewContainer {
+    height: 20rem;
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "testRunSummary": {
+    "totalTests": 12,
+    "passedTests": 3,
+    "skippedTests": 9,
+    "failedTests": 0,
+    "duration": 4130,
+    "timestamp": 1746378223007
+  },
+  "failureMap": {
+    "basic-resilience.test.tsx:Database connection pool recovers from overload": {
+      "component": "Database connection pool recovers from overload",
+      "failureType": "skipped",
+      "severity": "low",
+      "reasoning": "Requires database integration",
+      "recoveryState": "unreachable"
+    },
+    "basic-resilience.test.tsx:API rate limiting prevents cascading failures": {
+      "component": "API rate limiting prevents cascading failures",
+      "failureType": "skipped",
+      "severity": "low",
+      "reasoning": "Requires database integration",
+      "recoveryState": "unreachable"
+    },
+    "basic-resilience.test.tsx:Cache invalidation occurs after data corruption": {
+      "component": "Cache invalidation occurs after data corruption",
+      "failureType": "skipped",
+      "severity": "low",
+      "reasoning": "Requires >2GB memory allocation",
+      "recoveryState": "unreachable"
+    },
+    "basic-resilience.test.tsx:System state is consistent after recovery": {
+      "component": "System state is consistent after recovery",
+      "failureType": "skipped",
+      "severity": "low",
+      "reasoning": "Requires >2GB memory allocation",
+      "recoveryState": "unreachable"
+    },
+    "basic-resilience.test.tsx:Recovery time meets SLA requirements": {
+      "component": "Recovery time meets SLA requirements",
+      "failureType": "skipped",
+      "severity": "low",
+      "reasoning": "Requires >2GB memory allocation",
+      "recoveryState": "unreachable"
+    },
+    "basic-resilience.test.tsx:Partial system functionality is maintained during recovery": {
+      "component": "Partial system functionality is maintained during recovery",
+      "failureType": "skipped",
+      "severity": "low",
+      "reasoning": "Requires >2GB memory allocation",
+      "recoveryState": "unreachable"
+    }
+  },
+  "dependencyGraph": {
+    "NotificationSettings": [
+      "ChaosTestHarness",
+      "ux-impact-tracking",
+      "chaos-telemetry-integration"
+    ]
+  },
+  "federationSignals": [
+    {
+      "type": "dependency.update",
+      "payload": {
+        "NotificationSettings": [
+          "ChaosTestHarness",
+          "ux-impact-tracking",
+          "chaos-telemetry-integration"
+        ]
+      },
+      "path": [],
+      "reasoning": "Dependency graph analysis completed"
+    },
+    {
+      "type": "circuit.change",
+      "payload": {
+        "component": "fetchNotificationPreferences",
+        "from": "CLOSED",
+        "to": "OPEN",
+        "reason": "Failure threshold exceeded"
+      },
+      "path": ["NotificationSettings", "API"],
+      "reasoning": "Circuit breaker failure threshold exceeded, opening circuit"
+    },
+    {
+      "type": "recovery.path",
+      "payload": {
+        "component": "NotificationSettings",
+        "recoveryMechanism": "retry",
+        "duration": 2000,
+        "success": true
+      },
+      "path": ["NotificationSettings", "API"],
+      "reasoning": "Recovery mechanism activated and succeeded"
+    }
+  ],
+  "resourceUtilization": {
+    "memory": 256,
+    "cpu": 0.5,
+    "time": 4130
+  }
+}

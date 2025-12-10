@@ -1,0 +1,127 @@
+{
+  "testRunSummary": {
+    "totalTests": 19,
+    "passedTests": 0,
+    "skippedTests": 9,
+    "failedTests": 0,
+    "duration": 0,
+    "timestamp": 1746378639911
+  },
+  "failureMap": {
+    "basic-resilience.test.tsx:UX remains responsive during API degradation": {
+      "component": "UX remains responsive during API degradation",
+      "failureType": "skipped",
+      "severity": "low",
+      "reasoning": "Requires database integration",
+      "recoveryState": "unreachable",
+      "linkedDependencies": [
+        "UX",
+        "API"
+      ],
+      "impact": "none"
+    },
+    "basic-resilience.test.tsx:System recovers from cascading API failures": {
+      "component": "System recovers from cascading API failures",
+      "failureType": "skipped",
+      "severity": "low",
+      "reasoning": "Requires database integration",
+      "recoveryState": "unreachable",
+      "linkedDependencies": [
+        "UX",
+        "API"
+      ],
+      "impact": "none"
+    },
+    "basic-resilience.test.tsx:Recovery mechanisms activate in correct sequence": {
+      "component": "Recovery mechanisms activate in correct sequence",
+      "failureType": "skipped",
+      "severity": "low",
+      "reasoning": "Requires database integration",
+      "recoveryState": "unreachable",
+      "linkedDependencies": [
+        "UX",
+        "API"
+      ],
+      "impact": "none"
+    },
+    "basic-resilience.test.tsx:Database connection pool recovers from overload": {
+      "component": "Database connection pool recovers from overload",
+      "failureType": "skipped",
+      "severity": "low",
+      "reasoning": "Requires database integration",
+      "recoveryState": "unreachable",
+      "linkedDependencies": [
+        "UX",
+        "API"
+      ],
+      "impact": "none"
+    },
+    "basic-resilience.test.tsx:API rate limiting prevents cascading failures": {
+      "component": "API rate limiting prevents cascading failures",
+      "failureType": "skipped",
+      "severity": "low",
+      "reasoning": "Requires database integration",
+      "recoveryState": "unreachable",
+      "linkedDependencies": [
+        "UX",
+        "API"
+      ],
+      "impact": "none"
+    },
+    "basic-resilience.test.tsx:Cache invalidation occurs after data corruption": {
+      "component": "Cache invalidation occurs after data corruption",
+      "failureType": "skipped",
+      "severity": "low",
+      "reasoning": "Requires database integration",
+      "recoveryState": "unreachable",
+      "linkedDependencies": [
+        "UX",
+        "API"
+      ],
+      "impact": "none"
+    },
+    "basic-resilience.test.tsx:System state is consistent after recovery": {
+      "component": "System state is consistent after recovery",
+      "failureType": "skipped",
+      "severity": "low",
+      "reasoning": "Requires database integration",
+      "recoveryState": "unreachable",
+      "linkedDependencies": [
+        "UX",
+        "API"
+      ],
+      "impact": "none"
+    },
+    "basic-resilience.test.tsx:Recovery time meets SLA requirements": {
+      "component": "Recovery time meets SLA requirements",
+      "failureType": "skipped",
+      "severity": "low",
+      "reasoning": "Requires database integration",
+      "recoveryState": "unreachable",
+      "linkedDependencies": [
+        "UX",
+        "API"
+      ],
+      "impact": "none"
+    },
+    "basic-resilience.test.tsx:Partial system functionality is maintained during recovery": {
+      "component": "Partial system functionality is maintained during recovery",
+      "failureType": "skipped",
+      "severity": "low",
+      "reasoning": "Requires database integration",
+      "recoveryState": "unreachable",
+      "linkedDependencies": [
+        "UX",
+        "API"
+      ],
+      "impact": "none"
+    }
+  },
+  "dependencyGraph": {},
+  "federationSignals": [],
+  "resourceUtilization": {
+    "memory": 0,
+    "cpu": 0,
+    "time": 0
+  }
+}

@@ -1,0 +1,181 @@
+/* Phase customization styles */
+.phaseCircle {
+  display: flex;
+  height: 3rem;
+  width: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(229, 231, 235, 1);
+  color: white;
+}
+
+.phaseBadge {
+  margin-bottom: 0.25rem;
+  color: white;
+}
+
+.phaseIndicator {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  margin-right: 0.5rem;
+}
+
+.colorPreview {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(229, 231, 235, 1);
+}
+
+/* Bioelectric Regeneration Program Phase Colors */
+.phase1 {
+  background-color: #1d4ed8; /* Medical blue 700 */
+}
+
+.phase2 {
+  background-color: #059669; /* Medical green 600 */
+}
+
+.phase3 {
+  background-color: #0d9488; /* Medical teal 600 */
+}
+
+.phase4 {
+  background-color: #3b82f6; /* Medical blue 500 */
+}
+
+/* Common preset colors */
+.colorBlue {
+  background-color: #3b82f6;
+}
+
+.colorGreen {
+  background-color: #10b981;
+}
+
+.colorRed {
+  background-color: #ef4444;
+}
+
+.colorOrange {
+  background-color: #f97316;
+}
+
+.colorPurple {
+  background-color: #8b5cf6;
+}
+
+.colorTeal {
+  background-color: #14b8a6;
+}
+
+.colorYellow {
+  background-color: #f59e0b;
+}
+
+.colorGray {
+  background-color: #6b7280;
+}
+
+/* Medical Blue Scale */
+.medicalBlue100 {
+  background-color: #dbeafe;
+}
+
+.medicalBlue200 {
+  background-color: #bfdbfe;
+}
+
+.medicalBlue300 {
+  background-color: #93c5fd;
+}
+
+.medicalBlue400 {
+  background-color: #60a5fa;
+}
+
+.medicalBlue500 {
+  background-color: #3b82f6;
+}
+
+.medicalBlue600 {
+  background-color: #2563eb;
+}
+
+.medicalBlue700 {
+  background-color: #1d4ed8;
+}
+
+.medicalBlue800 {
+  background-color: #1e40af;
+}
+
+.medicalBlue900 {
+  background-color: #1e3a8a;
+}
+
+/* Medical Green Scale */
+.medicalGreen100 {
+  background-color: #d1fae5;
+}
+
+.medicalGreen200 {
+  background-color: #a7f3d0;
+}
+
+.medicalGreen300 {
+  background-color: #6ee7b7;
+}
+
+.medicalGreen400 {
+  background-color: #34d399;
+}
+
+.medicalGreen500 {
+  background-color: #10b981;
+}
+
+.medicalGreen600 {
+  background-color: #059669;
+}
+
+.medicalGreen700 {
+  background-color: #047857;
+}
+
+.medicalGreen800 {
+  background-color: #065f46;
+}
+
+.medicalGreen900 {
+  background-color: #064e3b;
+}
+
+/* Medical color palette */
+.medicalBlue {
+  background-color: #2563eb;
+}
+
+.medicalGreen {
+  background-color: #059669;
+}
+
+.medicalTeal {
+  background-color: #0d9488;
+}
+
+.medicalCyan {
+  background-color: #0891b2;
+}
+
+.medicalSky {
+  background-color: #0284c7;
+}
+
+/* Use these for custom colors */
+[data-color-hex] {
+  background-color: attr(data-color-hex);
+}

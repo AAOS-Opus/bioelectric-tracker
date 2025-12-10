@@ -1,0 +1,321 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  transition: 
+    border-color var(--motion-base) var(--ease-base),
+    box-shadow var(--motion-base) var(--ease-out),
+    transform var(--motion-quick) cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: border-color, box-shadow, transform;
+}
+
+.fieldWrapper {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Input sizes */
+.small .inputWrapper {
+  height: 32px;
+}
+
+.medium .inputWrapper {
+  height: 40px;
+}
+
+.large .inputWrapper {
+  height: 48px;
+}
+
+.small .input {
+  padding: 0 12px;
+  font-size: 0.75rem;
+}
+
+.medium .input {
+  padding: 0 12px;
+  font-size: 0.875rem;
+}
+
+.large .input {
+  padding: 0 16px;
+  font-size: 1rem;
+}
+
+/* Icons positioning */
+.leftIcon, .rightIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  color: var(--text-secondary);
+  transition: color var(--motion-base) var(--ease-base);
+}
+
+.small .leftIcon, .small .rightIcon {
+  font-size: 0.875rem;
+}
+
+.medium .leftIcon, .medium .rightIcon {
+  font-size: 1rem;
+}
+
+.large .leftIcon, .large .rightIcon {
+  font-size: 1.25rem;
+}
+
+.leftIcon + .fieldWrapper .input {
+  padding-left: 0;
+}
+
+.fieldWrapper + .rightIcon + .input {
+  padding-right: 0;
+}
+
+/* Input styling */
+.input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: inherit;
+  color: var(--text-primary);
+  padding-top: 0.5rem;
+}
+
+.input::placeholder {
+  color: var(--text-placeholder);
+  opacity: 0;
+  transition: opacity var(--motion-base) var(--ease-out);
+}
+
+.floating .input::placeholder {
+  opacity: 1;
+}
+
+/* Floating label */
+.label {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  pointer-events: none;
+  transition: 
+    transform var(--motion-base) var(--ease-out),
+    font-size var(--motion-base) var(--ease-out),
+    color var(--motion-base) var(--ease-base);
+}
+
+.small .label {
+  font-size: 0.75rem;
+}
+
+.medium .label {
+  font-size: 0.875rem;
+}
+
+.large .label {
+  font-size: 1rem;
+}
+
+.label.floating {
+  top: 0;
+  transform: translateY(-50%);
+}
+
+.small .label.floating {
+  font-size: 0.625rem;
+}
+
+.medium .label.floating {
+  font-size: 0.75rem;
+}
+
+.large .label.floating {
+  font-size: 0.75rem;
+}
+
+/* Required indicator */
+.requiredIndicator {
+  margin-left: 2px;
+  color: var(--status-error);
+}
+
+/* Focus state */
+.focused .inputWrapper {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-transparent);
+}
+
+.focused .label {
+  color: var(--primary);
+}
+
+/* Error state */
+.error .inputWrapper {
+  border-color: var(--status-error);
+}
+
+.error.focused .inputWrapper {
+  box-shadow: 0 0 0 2px rgba(var(--status-error-rgb), 0.3);
+}
+
+.error .label {
+  color: var(--status-error);
+}
+
+/* Success state */
+.success .inputWrapper {
+  border-color: var(--status-success);
+}
+
+.success.focused .inputWrapper {
+  box-shadow: 0 0 0 2px rgba(var(--status-success-rgb), 0.3);
+}
+
+.success .label {
+  color: var(--status-success);
+}
+
+/* Disabled state */
+.disabled .inputWrapper {
+  background-color: var(--surface-disabled);
+  border-color: var(--border);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.disabled .input, 
+.disabled .label, 
+.disabled .leftIcon, 
+.disabled .rightIcon {
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+/* Feedback text */
+.feedbackText {
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  color: var(--text-secondary);
+  transition: color var(--motion-base) var(--ease-base);
+}
+
+.errorText {
+  color: var(--status-error);
+}
+
+.successText {
+  color: var(--status-success);
+}
+
+/* Animation effects */
+.animating .inputWrapper {
+  animation: highlight 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.animating.error .inputWrapper {
+  animation: shake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.animating.success .inputWrapper {
+  animation: success 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Loading indicator */
+.loadingIndicator {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.loadingSpinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Animations */
+@keyframes highlight {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(0);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--primary-transparent);
+  }
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translateX(-1px);
+  }
+  20%, 80% {
+    transform: translateX(2px);
+  }
+  30%, 50%, 70% {
+    transform: translateX(-3px);
+  }
+  40%, 60% {
+    transform: translateX(3px);
+  }
+}
+
+@keyframes success {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .inputWrapper, .label, .input, .leftIcon, .rightIcon {
+    transition: all 0.1s ease;
+  }
+  
+  .animating .inputWrapper,
+  .animating.error .inputWrapper,
+  .animating.success .inputWrapper {
+    animation: none;
+  }
+  
+  .loadingSpinner {
+    animation: fade 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes fade {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+}

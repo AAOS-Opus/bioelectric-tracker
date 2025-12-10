@@ -1,0 +1,12 @@
+// Export all UI components for easier imports
+export { Button } from './button'
+export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './card'
+export { Input } from './input'
+export { Label } from './label'
+export { RadioGroup, RadioGroupItem } from './radio-group'
+export { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './select'
+export { Separator } from './separator'
+export { Slider } from './slider'
+export { Switch } from './switch'
+export { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs'
+export { ColorPicker } from './color-picker'
