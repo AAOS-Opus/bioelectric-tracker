@@ -7,7 +7,7 @@
  * Transforms raw time-series data into meaningful self-reflection insights.
  */
 
-import { useState, useEffect, useMemo, useRef, memo } from 'react';
+import { useState, useMemo, useRef, memo } from 'react';
 import {
   LineChart,
   Line,
@@ -61,13 +61,65 @@ interface BiomarkerChartsProps {
   className?: string;
   data?: BiomarkerDataPoint[];
   maxBiomarkers?: number;
+  isLoading?: boolean;
 }
 
 const BiomarkerCharts = memo(function BiomarkerCharts({
   className = '',
   data = [],
-  maxBiomarkers = 6
+  maxBiomarkers = 6,
+  isLoading = false
 }: BiomarkerChartsProps) {
+  if (isLoading) {
+    return (
+      <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 ${className}`}>
+        <div className="animate-pulse">
+          {/* Header Skeleton */}
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+              <div>
+                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-32 mb-2"></div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-48"></div>
+              </div>
+            </div>
+            <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+          </div>
+
+          {/* Controls Skeleton */}
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex gap-1">
+              <div className="h-9 w-20 bg-gray-200 dark:bg-gray-700 rounded-md"></div>
+              <div className="h-9 w-20 bg-gray-200 dark:bg-gray-700 rounded-md"></div>
+            </div>
+            <div className="h-4 w-32 bg-gray-200 dark:bg-gray-700 rounded"></div>
+          </div>
+
+          {/* Pills Skeleton */}
+          <div className="mb-6">
+            <div className="h-4 w-24 bg-gray-200 dark:bg-gray-700 rounded mb-3"></div>
+            <div className="flex flex-wrap gap-2">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="h-10 w-24 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+              ))}
+            </div>
+          </div>
+
+          {/* Chart Area Skeleton */}
+          <div className="h-80 bg-gray-200 dark:bg-gray-700 rounded-xl mb-6"></div>
+
+          {/* Insights Skeleton */}
+          <div>
+            <div className="h-6 w-40 bg-gray-200 dark:bg-gray-700 rounded mb-4"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="h-24 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+              <div className="h-24 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
   // State management
   const [selectedBiomarkers, setSelectedBiomarkers] = useState<Set<BiomarkerKey>>(
     new Set(['Energy', 'Sleep', 'Mood'])
@@ -341,21 +393,19 @@ const BiomarkerCharts = memo(function BiomarkerCharts({
         <div className="flex bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
           <button
             onClick={() => setDateRange('7d')}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-              dateRange === '7d'
-                ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm'
-                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-            }`}
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${dateRange === '7d'
+              ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm'
+              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+              }`}
           >
             7 Days
           </button>
           <button
             onClick={() => setDateRange('30d')}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-              dateRange === '30d'
-                ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm'
-                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-            }`}
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${dateRange === '30d'
+              ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm'
+              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+              }`}
           >
             30 Days
           </button>
@@ -382,17 +432,16 @@ const BiomarkerCharts = memo(function BiomarkerCharts({
                 key={key}
                 onClick={() => handleBiomarkerToggle(biomarker)}
                 disabled={!isSelected && selectedBiomarkers.size >= maxBiomarkers}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-sm font-medium transition-all duration-200 ${
-                  isSelected
-                    ? 'border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white'
-                    : 'border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
-                } ${!isSelected && selectedBiomarkers.size >= maxBiomarkers ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg border text-sm font-medium transition-all duration-200 ${isSelected
+                  ? 'border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white'
+                  : 'border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
+                  } ${!isSelected && selectedBiomarkers.size >= maxBiomarkers ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
               >
                 <div className="flex items-center gap-2">
                   <input
                     type="checkbox"
                     checked={isSelected}
-                    onChange={() => {}}
+                    onChange={() => { }}
                     className="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                   />
                   <span>{config.emoji}</span>
