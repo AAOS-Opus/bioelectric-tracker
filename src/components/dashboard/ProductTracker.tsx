@@ -8,6 +8,7 @@
  */
 
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { Loader2, Check, AlertCircle, PlusCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import { useProducts, ProductWithUsage, ProductUsageRequest } from '@/hooks/useProducts';
 import { useUserProgress } from '@/hooks/useUserProgress';
 import { useToast } from '@/components/ui/use-toast';
@@ -104,8 +105,8 @@ export default function ProductTracker({ className = '' }: ProductTrackerProps) 
 
     setShowConfetti(groupKey);
     toast({
-      title: `🎉 ${group.title} Complete!`,
-      description: `Amazing work! You've completed all your ${groupKey} products.`,
+      title: `${group.title} complete! 🎉`,
+      description: `Amazing work on your ${groupKey} routine!`,
       variant: 'success',
       duration: 4000,
     });
@@ -158,7 +159,7 @@ export default function ProductTracker({ className = '' }: ProductTrackerProps) 
       ));
 
       toast({
-        title: "Product unchecked",
+        title: "Product unchecked ↩️",
         description: "Tap 'Undo' within 5 seconds to restore.",
         variant: 'default',
         duration: 5000,
@@ -176,7 +177,7 @@ export default function ProductTracker({ className = '' }: ProductTrackerProps) 
                   ? { ...p, usage: { ...p.usage, todayCompleted: true } }
                   : p
               ));
-              toast({ title: "Restored!", variant: 'success', duration: 2000 });
+              toast({ title: "Restored! ✓", variant: 'success', duration: 2000 });
             }}
             className="text-sm font-medium text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300"
           >
@@ -201,8 +202,8 @@ export default function ProductTracker({ className = '' }: ProductTrackerProps) 
 
       // Show success animation and toast
       toast({
-        title: `✅ Nice work!`,
-        description: `You logged ${product.name}.`,
+        title: `${product.name} logged! ✅`,
+        description: "Keep up the great work!",
         variant: 'success',
         duration: 3000,
       });
@@ -210,8 +211,8 @@ export default function ProductTracker({ className = '' }: ProductTrackerProps) 
     } catch (error) {
       console.error('Failed to log product usage:', error);
       toast({
-        title: "Failed to log usage",
-        description: "Please try again.",
+        title: "Couldn't log product 😔",
+        description: "Please check your connection and try again.",
         variant: 'destructive',
         duration: 3000,
       });
@@ -325,13 +326,9 @@ export default function ProductTracker({ className = '' }: ProductTrackerProps) 
       } ${itemLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
     >
       {itemLoading ? (
-        <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-        </svg>
+        <Loader2 className="w-4 h-4 animate-spin" />
       ) : product.usage.todayCompleted ? (
-        <svg className="w-4 h-4 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-        </svg>
+        <Check className="w-4 h-4 animate-pulse" />
       ) : null}
     </button>
   ), [handleProductToggle]); // FIXED: Add handleProductToggle as dependency
@@ -367,9 +364,7 @@ export default function ProductTracker({ className = '' }: ProductTrackerProps) 
       <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-red-200 dark:border-red-800 p-6 ${className}`}>
         <div className="text-center">
           <div className="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-lg mx-auto mb-3 flex items-center justify-center">
-            <svg className="w-6 h-6 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-            </svg>
+            <AlertCircle className="w-6 h-6 text-red-600 dark:text-red-400" />
           </div>
           <p className="text-red-600 dark:text-red-400 text-sm">
             Unable to load product tracker. {error.message}
@@ -384,9 +379,7 @@ export default function ProductTracker({ className = '' }: ProductTrackerProps) 
       <div className={`bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 ${className}`}>
         <div className="text-center py-8">
           <div className="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-xl mx-auto mb-4 flex items-center justify-center">
-            <svg className="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
-            </svg>
+            <PlusCircle className="w-8 h-8 text-gray-400" />
           </div>
           <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
             No Products Assigned
@@ -479,9 +472,7 @@ export default function ProductTracker({ className = '' }: ProductTrackerProps) 
                   >
                     {loggingProduct === `batch-${group.key}` ? (
                       <span className="flex items-center gap-2">
-                        <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                        </svg>
+                        <Loader2 className="w-4 h-4 animate-spin" />
                         Logging...
                       </span>
                     ) : (
@@ -520,16 +511,13 @@ export default function ProductTracker({ className = '' }: ProductTrackerProps) 
                             </h5>
                             <button
                               onClick={() => setExpandedProduct(isExpanded ? null : product._id)}
-                              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-1"
+                              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-1 rounded focus:outline-none focus:ring-2 focus:ring-purple-400"
                             >
-                              <svg
-                                className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                              </svg>
+                              {isExpanded ? (
+                                <ChevronUp className="w-4 h-4" />
+                              ) : (
+                                <ChevronDown className="w-4 h-4" />
+                              )}
                             </button>
                           </div>
                           <p className={`text-sm mt-1 ${

@@ -8,6 +8,7 @@
  */
 
 import { useState, useEffect, useRef } from 'react';
+import { Loader2 } from 'lucide-react';
 import { useUserProgress } from '@/hooks/useUserProgress';
 import { useToast } from '@/components/ui/use-toast';
 import { postFetcher } from '@/lib/fetcher';
@@ -93,8 +94,8 @@ export default function ModalitySession({ className = '', onSessionLogged }: Mod
             setIsTimerActive(false);
             setShowExperienceForm(true);
             toast({
-              title: "🌀 Session Complete!",
-              description: "Log your experience below to complete the session.",
+              title: "Session complete! 🌀",
+              description: "Share your experience below to finish.",
               variant: 'success',
               duration: 5000,
             });
@@ -149,7 +150,7 @@ export default function ModalitySession({ className = '', onSessionLogged }: Mod
     if (errors.length > 0) {
       setShowValidationErrors(true);
       toast({
-        title: "Please fix the following errors:",
+        title: "Please check your entries ⚠️",
         description: errors.join(', '),
         variant: 'destructive',
         duration: 4000,
@@ -163,8 +164,8 @@ export default function ModalitySession({ className = '', onSessionLogged }: Mod
     setShowValidationErrors(false);
 
     toast({
-      title: `🧘 ${getSelectedModality()?.label} Session Started`,
-      description: `${duration} minutes of healing time begins now.`,
+      title: `${getSelectedModality()?.label} session started! 🧘`,
+      description: `${duration} minutes of healing begins now.`,
       variant: 'success',
       duration: 3000,
     });
@@ -188,7 +189,7 @@ export default function ModalitySession({ className = '', onSessionLogged }: Mod
     if (errors.length > 0) {
       setShowValidationErrors(true);
       toast({
-        title: "Please fix the following errors:",
+        title: "Please check your entries ⚠️",
         description: errors.join(', '),
         variant: 'destructive',
         duration: 4000,
@@ -213,7 +214,7 @@ export default function ModalitySession({ className = '', onSessionLogged }: Mod
 
       // Success feedback
       toast({
-        title: "✨ Session Logged Successfully",
+        title: "Session logged! ✨",
         description: `Your ${sessionData.modality} session has been recorded.`,
         variant: 'success',
         duration: 4000,
@@ -239,8 +240,8 @@ export default function ModalitySession({ className = '', onSessionLogged }: Mod
     } catch (error) {
       console.error('Failed to log session:', error);
       toast({
-        title: "Failed to Log Session",
-        description: "Please try again. Check your connection.",
+        title: "Couldn't save session 😔",
+        description: "Please check your connection and try again.",
         variant: 'destructive',
         duration: 4000,
       });
@@ -431,9 +432,7 @@ export default function ModalitySession({ className = '', onSessionLogged }: Mod
           >
             {isSubmitting ? (
               <span className="flex items-center justify-center gap-2">
-                <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
+                <Loader2 className="w-4 h-4 animate-spin" />
                 Logging...
               </span>
             ) : (

@@ -8,6 +8,7 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { Loader2 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useUserProgress } from '@/hooks/useUserProgress';
 import { useToast } from '@/components/ui/use-toast';
@@ -274,8 +275,8 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
     setShowCustomBiomarkerForm(false);
 
     toast({
-      title: "Custom biomarker added!",
-      description: `${newBiomarkerEmoji} ${newBiomarker.label} is now available for tracking.`,
+      title: "Biomarker added! 📊",
+      description: `${newBiomarkerEmoji} ${newBiomarker.label} is ready for tracking.`,
       variant: 'success',
       duration: 3000,
     });
@@ -295,8 +296,8 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
 
     if (!plainTextNarrative && Object.keys(biomarkers).length === 0) {
       toast({
-        title: "Nothing to save",
-        description: "Please add either a narrative or biomarker values.",
+        title: "Nothing to save yet 📝",
+        description: "Add a reflection or biomarker values to continue.",
         variant: 'destructive',
         duration: 3000,
       });
@@ -320,8 +321,8 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
 
       // Success feedback
       toast({
-        title: "✅ Your progress has been recorded",
-        description: "Your reflection and biomarkers have been saved successfully.",
+        title: "Progress saved! 🎯",
+        description: "Your reflection and biomarkers have been recorded.",
         variant: 'success',
         duration: 4000,
       });
@@ -350,8 +351,8 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
     } catch (error) {
       console.error('Failed to save progress note:', error);
       toast({
-        title: "Failed to save progress",
-        description: "Please try again. Check your connection.",
+        title: "Couldn't save progress 😔",
+        description: "Please check your connection and try again.",
         variant: 'destructive',
         duration: 4000,
       });
@@ -615,9 +616,7 @@ export default function ProgressNoteForm({ className = '', onNoteSaved }: Progre
       >
         {isSubmitting ? (
           <span className="flex items-center justify-center gap-2">
-            <svg className="w-5 h-5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-            </svg>
+            <Loader2 className="w-5 h-5 animate-spin" />
             Saving Entry...
           </span>
         ) : (

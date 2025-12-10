@@ -45,10 +45,10 @@ export const TodaysProductsCard = memo(function TodaysProductsCard({
         productId: product._id,
         date: new Date().toISOString().split('T')[0],
       });
-      showToast.success(`${product.name} logged!`);
+      showToast.success(`${product.name} logged! ✅`);
     } catch (error) {
       console.error('Failed to log product usage:', error);
-      showToast.error('Failed to log product usage');
+      showToast.error("Couldn't log product 😔");
     } finally {
       setLoggingProduct(null);
     }
