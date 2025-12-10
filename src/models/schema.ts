@@ -74,6 +74,13 @@ export interface IUser extends Document {
     currentPhaseNumber: number;
     complianceStreak: number;
     createdAt: Date;
+    onboardingComplete?: boolean;
+    preferences?: Record<string, any>;
+    wizardState?: {
+        step: string;
+        data: Record<string, any>;
+        updatedAt: Date;
+    };
 }
 
 export interface IPhase extends Document {
@@ -137,6 +144,13 @@ const userSchema = new Schema<IUser>({
     currentPhaseNumber: { type: Number, min: 1, max: 4, required: true },
     complianceStreak: { type: Number, default: 0, min: 0 },
     createdAt: { type: Date, default: Date.now },
+    onboardingComplete: { type: Boolean, default: false },
+    preferences: { type: Schema.Types.Mixed, default: {} },
+    wizardState: {
+        step: { type: String },
+        data: { type: Schema.Types.Mixed },
+        updatedAt: { type: Date }
+    }
 });
 
 // Phase Schema
