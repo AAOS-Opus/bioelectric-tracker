@@ -1,7 +1,7 @@
 import './globals.css'
 import React from 'react'
 import { NextAuthProvider } from '../providers/NextAuthProvider'
-import { PreferencesProvider } from '@/contexts/PreferencesContext'
+import ClientProviders from '@/components/ClientProviders'
 import { ThemeProvider } from 'next-themes'
 import { Toaster } from 'react-hot-toast'
 
@@ -20,10 +20,10 @@ export default function RootLayout({
       <body className="min-h-screen bg-background text-foreground" suppressHydrationWarning>
         <NextAuthProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <PreferencesProvider>
+            <ClientProviders>
               <Toaster position="top-center" reverseOrder={false} />
               {children}
-            </PreferencesProvider>
+            </ClientProviders>
           </ThemeProvider>
         </NextAuthProvider>
       </body>

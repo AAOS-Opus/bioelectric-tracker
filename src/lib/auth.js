@@ -13,9 +13,10 @@ export const authOptions = {
         // For development - accept any credentials
         if (credentials?.email && credentials?.password) {
           return {
-            id: '1',
+            id: '507f1f77bcf86cd799439011',
             name: 'Test User',
             email: credentials.email,
+            currentPhaseNumber: 2, // Default to Phase 2 for testing
           };
         }
         return null;
@@ -30,12 +31,14 @@ export const authOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.currentPhaseNumber = user.currentPhaseNumber;
       }
       return token;
     },
     async session({ session, token }) {
       if (token) {
         session.user.id = token.id;
+        session.user.currentPhaseNumber = token.currentPhaseNumber;
       }
       return session;
     },

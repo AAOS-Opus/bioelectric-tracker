@@ -67,7 +67,7 @@ export const PhaseProgressProvider = ({ children }: PhaseProgressProviderProps) 
       setProgress(phase.completionPercentage || 0)
       
       // Track analytics event
-      if (window.trackEvent) {
+      if (typeof window !== 'undefined' && window.trackEvent) {
         window.trackEvent('phase_progress_view', {
           phaseNumber,
           progress: phase.completionPercentage
@@ -106,7 +106,7 @@ export const PhaseProgressProvider = ({ children }: PhaseProgressProviderProps) 
       }
       
       // Track analytics event
-      if (window.trackEvent) {
+      if (typeof window !== 'undefined' && window.trackEvent) {
         window.trackEvent('phase_progress_update', {
           phaseNumber: currentPhase.phaseNumber,
           progress: newProgress

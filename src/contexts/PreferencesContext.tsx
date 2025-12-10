@@ -92,16 +92,18 @@ export const PreferencesProvider = ({ children }: PreferencesProviderProps) => {
 
   // Load preferences from local storage on mount or when user changes
   useEffect(() => {
+    if (typeof window === 'undefined') return
+
     const loadPreferences = async () => {
       setIsLoading(true)
-      
+
       try {
         // First try to load from localStorage as a fallback
         const localPreferences = localStorage.getItem('userPreferences')
         if (localPreferences) {
           setPreferences(JSON.parse(localPreferences))
         }
-        
+
         // If authenticated, fetch from API
         if (session?.user?.id) {
           const response = await fetch('/api/user/preferences')
@@ -127,7 +129,7 @@ export const PreferencesProvider = ({ children }: PreferencesProviderProps) => {
         setIsLoading(false)
       }
     }
-    
+
     if (status !== 'loading') {
       loadPreferences()
     }
@@ -135,12 +137,14 @@ export const PreferencesProvider = ({ children }: PreferencesProviderProps) => {
 
   // Handle online/offline status
   useEffect(() => {
+    if (typeof window === 'undefined') return
+
     const handleOnline = () => setIsOnline(true)
     const handleOffline = () => setIsOnline(false)
-    
+
     window.addEventListener('online', handleOnline)
     window.addEventListener('offline', handleOffline)
-    
+
     return () => {
       window.removeEventListener('online', handleOnline)
       window.removeEventListener('offline', handleOffline)
@@ -207,7 +211,7 @@ export const PreferencesProvider = ({ children }: PreferencesProviderProps) => {
 
   // Set a specific preference
   const setPreference = useCallback(<K extends keyof ExtendedUserPreferences>(
-    key: K, 
+    key: K,
     value: ExtendedUserPreferences[K]
   ) => {
     setPreferences(prev => {
@@ -215,20 +219,22 @@ export const PreferencesProvider = ({ children }: PreferencesProviderProps) => {
         ...prev,
         [key]: value
       }
-      
+
       // Update localStorage immediately for a responsive feel
-      localStorage.setItem('userPreferences', JSON.stringify(updated))
-      
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userPreferences', JSON.stringify(updated))
+      }
+
       // Start sync process
       syncToServer(updated)
-      
+
       return updated
     })
   }, [syncToServer])
 
   // Set a specific display preference
   const setDisplayPreference = useCallback(<K extends keyof DisplayPreferences>(
-    key: K, 
+    key: K,
     value: DisplayPreferences[K]
   ) => {
     setPreferences(prev => {
@@ -239,17 +245,19 @@ export const PreferencesProvider = ({ children }: PreferencesProviderProps) => {
           [key]: value
         }
       }
-      
-      localStorage.setItem('userPreferences', JSON.stringify(updated))
+
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userPreferences', JSON.stringify(updated))
+      }
       syncToServer(updated)
-      
+
       return updated
     })
   }, [syncToServer])
 
   // Set a specific reminder preference
   const setReminderPreference = useCallback(<K extends keyof ReminderDefaults>(
-    key: K, 
+    key: K,
     value: ReminderDefaults[K]
   ) => {
     setPreferences(prev => {
@@ -260,17 +268,19 @@ export const PreferencesProvider = ({ children }: PreferencesProviderProps) => {
           [key]: value
         }
       }
-      
-      localStorage.setItem('userPreferences', JSON.stringify(updated))
+
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userPreferences', JSON.stringify(updated))
+      }
       syncToServer(updated)
-      
+
       return updated
     })
   }, [syncToServer])
 
   // Set a specific accessibility preference
   const setAccessibilityPreference = useCallback(<K extends keyof AccessibilitySettings>(
-    key: K, 
+    key: K,
     value: AccessibilitySettings[K]
   ) => {
     setPreferences(prev => {
@@ -284,17 +294,19 @@ export const PreferencesProvider = ({ children }: PreferencesProviderProps) => {
           }
         }
       }
-      
-      localStorage.setItem('userPreferences', JSON.stringify(updated))
+
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userPreferences', JSON.stringify(updated))
+      }
       syncToServer(updated)
-      
+
       return updated
     })
   }, [syncToServer])
 
   // Set a specific theme preference
   const setThemePreference = useCallback(<K extends keyof ThemeSettings>(
-    key: K, 
+    key: K,
     value: ThemeSettings[K]
   ) => {
     setPreferences(prev => {
@@ -305,17 +317,19 @@ export const PreferencesProvider = ({ children }: PreferencesProviderProps) => {
           [key]: value
         }
       }
-      
-      localStorage.setItem('userPreferences', JSON.stringify(updated))
+
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userPreferences', JSON.stringify(updated))
+      }
       syncToServer(updated)
-      
+
       return updated
     })
   }, [syncToServer])
 
   // Set a specific notification preference
   const setNotificationPreference = useCallback(<K extends keyof NotificationSettings>(
-    key: K, 
+    key: K,
     value: NotificationSettings[K]
   ) => {
     setPreferences(prev => {
@@ -326,17 +340,19 @@ export const PreferencesProvider = ({ children }: PreferencesProviderProps) => {
           [key]: value
         }
       }
-      
-      localStorage.setItem('userPreferences', JSON.stringify(updated))
+
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userPreferences', JSON.stringify(updated))
+      }
       syncToServer(updated)
-      
+
       return updated
     })
   }, [syncToServer])
 
   // Set a specific data visualization preference
   const setDataVisualizationPreference = useCallback(<K extends keyof DataVisualizationPreferences>(
-    key: K, 
+    key: K,
     value: DataVisualizationPreferences[K]
   ) => {
     setPreferences(prev => {
@@ -347,17 +363,19 @@ export const PreferencesProvider = ({ children }: PreferencesProviderProps) => {
           [key]: value
         }
       }
-      
-      localStorage.setItem('userPreferences', JSON.stringify(updated))
+
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userPreferences', JSON.stringify(updated))
+      }
       syncToServer(updated)
-      
+
       return updated
     })
   }, [syncToServer])
 
   // Set a specific UI customization preference
   const setUICustomizationPreference = useCallback(<K extends keyof UICustomization>(
-    key: K, 
+    key: K,
     value: UICustomization[K]
   ) => {
     setPreferences(prev => {
@@ -371,17 +389,19 @@ export const PreferencesProvider = ({ children }: PreferencesProviderProps) => {
           }
         }
       }
-      
-      localStorage.setItem('userPreferences', JSON.stringify(updated))
+
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userPreferences', JSON.stringify(updated))
+      }
       syncToServer(updated)
-      
+
       return updated
     })
   }, [syncToServer])
 
   // Set a specific data handling preference
   const setDataHandlingPreference = useCallback(<K extends keyof DataHandlingPreferences>(
-    key: K, 
+    key: K,
     value: DataHandlingPreferences[K]
   ) => {
     setPreferences(prev => {
@@ -392,17 +412,19 @@ export const PreferencesProvider = ({ children }: PreferencesProviderProps) => {
           [key]: value
         }
       }
-      
-      localStorage.setItem('userPreferences', JSON.stringify(updated))
+
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userPreferences', JSON.stringify(updated))
+      }
       syncToServer(updated)
-      
+
       return updated
     })
   }, [syncToServer])
 
   // Set a specific behavioral preference
   const setBehavioralPreference = useCallback(<K extends keyof BehavioralPreferences>(
-    key: K, 
+    key: K,
     value: BehavioralPreferences[K]
   ) => {
     setPreferences(prev => {
@@ -413,10 +435,12 @@ export const PreferencesProvider = ({ children }: PreferencesProviderProps) => {
           [key]: value
         }
       }
-      
-      localStorage.setItem('userPreferences', JSON.stringify(updated))
+
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userPreferences', JSON.stringify(updated))
+      }
       syncToServer(updated)
-      
+
       return updated
     })
   }, [syncToServer])
@@ -425,28 +449,31 @@ export const PreferencesProvider = ({ children }: PreferencesProviderProps) => {
   const resetPreferences = useCallback(() => {
     const defaultPreferences = createEmptyPreferences()
     setPreferences(defaultPreferences)
-    localStorage.setItem('userPreferences', JSON.stringify(defaultPreferences))
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('userPreferences', JSON.stringify(defaultPreferences))
+    }
     syncToServer(defaultPreferences)
   }, [syncToServer])
 
   // Apply global theme based on preference
   useEffect(() => {
+    if (typeof window === 'undefined') return
     if (!preferences.theme?.mode) return
 
     const currentHour = new Date().getHours();
     const [startHour] = preferences.theme.schedule.darkModeStart.split(':').map(Number);
     const [endHour] = preferences.theme.schedule.darkModeEnd.split(':').map(Number);
-    
+
     // Check if current time is within dark mode schedule
-    const isScheduledDarkMode = preferences.theme.schedule.enabled && 
-      ((startHour > endHour) ? 
-        (currentHour >= startHour || currentHour < endHour) : 
+    const isScheduledDarkMode = preferences.theme.schedule.enabled &&
+      ((startHour > endHour) ?
+        (currentHour >= startHour || currentHour < endHour) :
         (currentHour >= startHour && currentHour < endHour));
-    
-    const isDark = 
-      preferences.theme.mode === 'dark' || 
+
+    const isDark =
+      preferences.theme.mode === 'dark' ||
       (preferences.theme.mode === 'scheduled' && isScheduledDarkMode) ||
-      (preferences.theme.mode === 'system' && 
+      (preferences.theme.mode === 'system' &&
         window.matchMedia('(prefers-color-scheme: dark)').matches);
     
     if (isDark) {
@@ -503,12 +530,13 @@ export const PreferencesProvider = ({ children }: PreferencesProviderProps) => {
 
   // Apply accessibility preferences globally
   useEffect(() => {
+    if (typeof window === 'undefined') return
     if (!preferences.display?.accessibility) return
 
-    const { 
-      reducedMotion, 
-      highContrast, 
-      largeText, 
+    const {
+      reducedMotion,
+      highContrast,
+      largeText,
       screenReaderOptimized,
       useSimplifiedLanguage,
       enableAudioCues,
@@ -567,6 +595,7 @@ export const PreferencesProvider = ({ children }: PreferencesProviderProps) => {
 
   // Apply UI customization preferences
   useEffect(() => {
+    if (typeof window === 'undefined') return
     if (!preferences.display?.uiCustomization) return
 
     const { density, animationsEnabled } = preferences.display.uiCustomization

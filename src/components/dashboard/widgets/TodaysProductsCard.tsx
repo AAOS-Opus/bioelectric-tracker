@@ -46,6 +46,16 @@ export const TodaysProductsCard = memo(function TodaysProductsCard({
     }
   };
 
+  const { todaysProducts, completedProducts, totalProducts, completedCount, complianceStreak } = useMemo(() => {
+    const todaysProducts = products?.filter(product => !product.usage.todayCompleted) || [];
+    const completedProducts = products?.filter(product => product.usage.todayCompleted) || [];
+    const totalProducts = products?.length || 0;
+    const completedCount = completedProducts.length;
+    const complianceStreak = completedProducts.length > 0 ? completedProducts[0].usage.streakDays : 0;
+
+    return { todaysProducts, completedProducts, totalProducts, completedCount, complianceStreak };
+  }, [products]);
+
   if (isLoading) {
     return (
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow duration-200">
@@ -85,15 +95,7 @@ export const TodaysProductsCard = memo(function TodaysProductsCard({
     );
   }
 
-  const { todaysProducts, completedProducts, totalProducts, completedCount, complianceStreak } = useMemo(() => {
-    const todaysProducts = products?.filter(product => !product.usage.todayCompleted) || [];
-    const completedProducts = products?.filter(product => product.usage.todayCompleted) || [];
-    const totalProducts = products?.length || 0;
-    const completedCount = completedProducts.length;
-    const complianceStreak = completedProducts.length > 0 ? completedProducts[0].usage.streakDays : 0;
 
-    return { todaysProducts, completedProducts, totalProducts, completedCount, complianceStreak };
-  }, [products]);
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow duration-200">

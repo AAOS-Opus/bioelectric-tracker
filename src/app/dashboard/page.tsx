@@ -28,7 +28,7 @@ import {
 import PhaseProgress from '@/components/dashboard/PhaseProgress';
 import NotificationCenter from '@/components/notifications/NotificationCenter';
 import { InsightCards } from '@/components/insights/InsightCard';
-import OnboardingWizard from '../../../components/onboarding/OnboardingWizard';
+import OnboardingWizard from '@/components/onboarding/OnboardingWizard';
 
 function DashboardContent() {
   const { data: session } = useSession();
