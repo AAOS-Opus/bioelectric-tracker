@@ -21,16 +21,16 @@ import {
 } from 'recharts';
 import { format, subDays, parseISO } from 'date-fns';
 
-// Biomarker configuration with consistent colors and metadata
+// Biomarker configuration with WCAG AA compliant colors (3:1 contrast against dark bg)
 const BIOMARKER_CONFIG = {
-  Energy: { color: '#f59e0b', emoji: '⚡', label: 'Energy' },
-  Sleep: { color: '#6366f1', emoji: '😴', label: 'Sleep Quality' },
-  Digestion: { color: '#10b981', emoji: '🍽️', label: 'Digestion' },
-  Mood: { color: '#ec4899', emoji: '🙂', label: 'Mood' },
-  Focus: { color: '#8b5cf6', emoji: '🎯', label: 'Focus' },
-  Hydration: { color: '#06b6d4', emoji: '💧', label: 'Hydration' },
-  Stress: { color: '#ef4444', emoji: '😰', label: 'Stress Level' },
-  Pain: { color: '#f97316', emoji: '🤕', label: 'Pain Level' },
+  Energy: { color: '#fbbf24', emoji: '⚡', label: 'Energy' },        // amber-400 (brighter)
+  Sleep: { color: '#818cf8', emoji: '😴', label: 'Sleep Quality' },  // indigo-400 (brighter for contrast)
+  Digestion: { color: '#34d399', emoji: '🍽️', label: 'Digestion' }, // emerald-400 (brighter)
+  Mood: { color: '#f472b6', emoji: '🙂', label: 'Mood' },            // pink-400 (brighter)
+  Focus: { color: '#a78bfa', emoji: '🎯', label: 'Focus' },          // violet-400 (brighter for contrast)
+  Hydration: { color: '#22d3ee', emoji: '💧', label: 'Hydration' },  // cyan-400 (brighter)
+  Stress: { color: '#f87171', emoji: '😰', label: 'Stress Level' },  // red-400 (brighter)
+  Pain: { color: '#fb923c', emoji: '🤕', label: 'Pain Level' },      // orange-400 (brighter)
 };
 
 type BiomarkerKey = keyof typeof BIOMARKER_CONFIG;
