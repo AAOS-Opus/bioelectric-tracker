@@ -3,6 +3,8 @@
 import { memo } from 'react';
 import { UserProgressData } from '@/hooks/useUserProgress';
 import { FetchError } from '@/lib/fetcher';
+import { BarChart3, AlertCircle, AlertTriangle, Award, TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface ProgressSummaryCardProps {
   data: UserProgressData | undefined;
@@ -13,25 +15,25 @@ interface ProgressSummaryCardProps {
 export const ProgressSummaryCard = memo(function ProgressSummaryCard({ data, isLoading, error }: ProgressSummaryCardProps) {
   if (isLoading) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow duration-200">
+      <div className="bg-gray-800/50 backdrop-blur-xl rounded-xl border border-gray-700/50 p-6 transition-all duration-200">
         <div className="animate-pulse">
           <div className="flex items-center gap-3 mb-4">
-            <div className="h-8 w-8 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
-            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-32"></div>
+            <div className="h-8 w-8 bg-gray-700 rounded-lg"></div>
+            <div className="h-6 bg-gray-700 rounded w-32"></div>
           </div>
           <div className="grid grid-cols-2 gap-4 mb-4">
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="text-center">
-                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-8 mx-auto mb-1"></div>
-                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-16 mx-auto"></div>
+                <div className="h-6 bg-gray-700 rounded w-8 mx-auto mb-1"></div>
+                <div className="h-3 bg-gray-700 rounded w-16 mx-auto"></div>
               </div>
             ))}
           </div>
           <div className="space-y-2">
             {[1, 2, 3].map((i) => (
               <div key={i} className="flex items-center justify-between">
-                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
-                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-12"></div>
+                <div className="h-4 bg-gray-700 rounded w-20"></div>
+                <div className="h-4 bg-gray-700 rounded w-12"></div>
               </div>
             ))}
           </div>
@@ -42,16 +44,14 @@ export const ProgressSummaryCard = memo(function ProgressSummaryCard({ data, isL
 
   if (error) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-red-200 dark:border-red-800 p-6">
+      <div className="bg-gray-800/50 backdrop-blur-xl rounded-xl border border-red-500/30 p-6">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-8 h-8 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center">
-            <svg className="w-4 h-4 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-            </svg>
+          <div className="w-8 h-8 bg-red-900/50 rounded-lg flex items-center justify-center">
+            <AlertCircle className="h-4 w-4 text-red-400" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Your Progress</h3>
+          <h3 className="text-lg font-semibold text-white">Your Progress</h3>
         </div>
-        <p className="text-red-600 dark:text-red-400 text-sm">
+        <p className="text-red-400 text-sm">
           Unable to load progress data. {error.message}
         </p>
       </div>
@@ -60,16 +60,14 @@ export const ProgressSummaryCard = memo(function ProgressSummaryCard({ data, isL
 
   if (!data) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+      <div className="bg-gray-800/50 backdrop-blur-xl rounded-xl border border-gray-700/50 p-6">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-            <svg className="w-4 h-4 text-gray-600 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
-            </svg>
+          <div className="w-8 h-8 bg-gray-700/50 rounded-lg flex items-center justify-center">
+            <BarChart3 className="h-4 w-4 text-gray-400" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Your Progress</h3>
+          <h3 className="text-lg font-semibold text-white">Your Progress</h3>
         </div>
-        <p className="text-gray-500 dark:text-gray-400 text-sm">
+        <p className="text-gray-400 text-sm">
           No progress data available yet. Start your journey!
         </p>
       </div>
@@ -88,55 +86,53 @@ export const ProgressSummaryCard = memo(function ProgressSummaryCard({ data, isL
   const isStaleData = daysSinceLastEntry > 3;
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow duration-200">
+    <div className="bg-gray-800/50 backdrop-blur-xl rounded-xl border border-gray-700/50 p-6 transition-all duration-200 hover:border-purple-500/30">
       {/* Header */}
       <div className="flex items-center gap-3 mb-4">
-        <div className="w-8 h-8 bg-indigo-100 dark:bg-indigo-900 rounded-lg flex items-center justify-center">
-          <svg className="w-4 h-4 text-indigo-600 dark:text-indigo-400" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
-          </svg>
+        <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+          <BarChart3 className="h-4 w-4 text-white" />
         </div>
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Your Progress</h3>
+        <h3 className="text-lg font-semibold text-white">Your Progress</h3>
       </div>
 
       {/* Key Metrics Grid */}
       <div className="grid grid-cols-2 gap-4 mb-6">
         {/* Compliance Rate */}
-        <div className="text-center">
-          <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
+        <div className="text-center p-3 bg-gray-700/30 rounded-lg">
+          <div className="text-2xl font-bold text-purple-400">
             {productCompliance?.last7Days?.percentage || 0}%
           </div>
-          <div className="text-xs text-gray-500 dark:text-gray-400">
+          <div className="text-xs text-gray-400">
             7-day compliance
           </div>
         </div>
 
         {/* Modality Sessions */}
-        <div className="text-center">
-          <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+        <div className="text-center p-3 bg-gray-700/30 rounded-lg">
+          <div className="text-2xl font-bold text-blue-400">
             {modalityStats?.last7Days?.sessions || 0}
           </div>
-          <div className="text-xs text-gray-500 dark:text-gray-400">
+          <div className="text-xs text-gray-400">
             Sessions this week
           </div>
         </div>
 
         {/* Current Streak */}
-        <div className="text-center">
-          <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+        <div className="text-center p-3 bg-gray-700/30 rounded-lg">
+          <div className="text-2xl font-bold text-green-400">
             {streaks?.currentCompliance || 0}
           </div>
-          <div className="text-xs text-gray-500 dark:text-gray-400">
+          <div className="text-xs text-gray-400">
             Current streak
           </div>
         </div>
 
         {/* Biomarker Entries */}
-        <div className="text-center">
-          <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+        <div className="text-center p-3 bg-gray-700/30 rounded-lg">
+          <div className="text-2xl font-bold text-amber-400">
             {biomarkerTrends?.totalEntries || 0}
           </div>
-          <div className="text-xs text-gray-500 dark:text-gray-400">
+          <div className="text-xs text-gray-400">
             Total entries
           </div>
         </div>
@@ -145,20 +141,20 @@ export const ProgressSummaryCard = memo(function ProgressSummaryCard({ data, isL
       {/* Biomarker Trends */}
       {biomarkerTrends?.recentChanges && biomarkerTrends.recentChanges.length > 0 && (
         <div className="mb-4">
-          <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Recent Biomarker Trends</h4>
+          <h4 className="text-sm font-medium text-gray-300 mb-2">Recent Biomarker Trends</h4>
           <div className="space-y-2">
             {biomarkerTrends.recentChanges.slice(0, 3).map((change, index) => (
-              <div key={index} className="flex items-center justify-between text-sm">
-                <span className="text-gray-600 dark:text-gray-400">{change.name}</span>
-                <div className="flex items-center gap-1">
-                  <span className={`font-medium ${
-                    change.trend === 'up' ? 'text-green-600 dark:text-green-400' :
-                    change.trend === 'down' ? 'text-red-600 dark:text-red-400' :
-                    'text-gray-600 dark:text-gray-400'
-                  }`}>
-                    {change.trend === 'up' ? '↑' : change.trend === 'down' ? '↓' : '→'}
-                  </span>
-                  <span className="text-gray-900 dark:text-white font-medium">
+              <div key={index} className="flex items-center justify-between text-sm p-2 bg-gray-700/20 rounded-lg">
+                <span className="text-gray-400">{change.name}</span>
+                <div className="flex items-center gap-2">
+                  {change.trend === 'up' ? (
+                    <TrendingUp className="h-4 w-4 text-green-400" />
+                  ) : change.trend === 'down' ? (
+                    <TrendingDown className="h-4 w-4 text-red-400" />
+                  ) : (
+                    <Minus className="h-4 w-4 text-gray-400" />
+                  )}
+                  <span className="text-white font-medium">
                     {change.value}
                   </span>
                 </div>
@@ -171,17 +167,17 @@ export const ProgressSummaryCard = memo(function ProgressSummaryCard({ data, isL
       {/* Modality Stats */}
       {modalityStats && (
         <div className="mb-4">
-          <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Activity Summary</h4>
+          <h4 className="text-sm font-medium text-gray-300 mb-2">Activity Summary</h4>
           <div className="space-y-2">
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-600 dark:text-gray-400">Total minutes this week</span>
-              <span className="text-gray-900 dark:text-white font-medium">
+            <div className="flex items-center justify-between text-sm p-2 bg-gray-700/20 rounded-lg">
+              <span className="text-gray-400">Total minutes this week</span>
+              <span className="text-white font-medium">
                 {modalityStats.last7Days?.minutes || 0} min
               </span>
             </div>
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-600 dark:text-gray-400">Average intensity</span>
-              <span className="text-gray-900 dark:text-white font-medium">
+            <div className="flex items-center justify-between text-sm p-2 bg-gray-700/20 rounded-lg">
+              <span className="text-gray-400">Average intensity</span>
+              <span className="text-white font-medium">
                 {modalityStats.averageIntensity?.toFixed(1) || '0.0'}/10
               </span>
             </div>
@@ -191,12 +187,10 @@ export const ProgressSummaryCard = memo(function ProgressSummaryCard({ data, isL
 
       {/* Stale Data Warning */}
       {isStaleData && (
-        <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-3 mb-4">
+        <div className="bg-amber-900/20 border border-amber-500/30 rounded-lg p-3 mb-4">
           <div className="flex items-center gap-2">
-            <svg className="w-4 h-4 text-amber-600 dark:text-amber-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-            </svg>
-            <p className="text-sm text-amber-800 dark:text-amber-200">
+            <AlertTriangle className="h-4 w-4 text-amber-400" />
+            <p className="text-sm text-amber-200">
               Last entry: {daysSinceLastEntry} days ago
             </p>
           </div>
@@ -205,23 +199,29 @@ export const ProgressSummaryCard = memo(function ProgressSummaryCard({ data, isL
 
       {/* Quick Actions */}
       <div className="flex gap-2">
-        <button className="flex-1 text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium bg-indigo-50 dark:bg-indigo-900/30 px-3 py-2 rounded-md hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-colors">
+        <button className={cn(
+          "flex-1 text-sm font-medium px-3 py-2 rounded-lg transition-all",
+          "text-purple-400 bg-purple-900/30 hover:bg-purple-900/50 hover:text-purple-300",
+          "focus:outline-none focus:ring-2 focus:ring-purple-500"
+        )}>
           View Details
         </button>
-        <button className="flex-1 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 font-medium bg-gray-50 dark:bg-gray-700 px-3 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+        <button className={cn(
+          "flex-1 text-sm font-medium px-3 py-2 rounded-lg transition-all",
+          "text-gray-400 bg-gray-700/50 hover:bg-gray-700 hover:text-gray-300",
+          "focus:outline-none focus:ring-2 focus:ring-gray-500"
+        )}>
           Add Entry
         </button>
       </div>
 
       {/* Achievement Badge (if any) */}
       {streaks && streaks.currentCompliance >= 7 && (
-        <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
-          <div className="flex items-center justify-center gap-2 text-sm text-green-700 dark:text-green-300">
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-            </svg>
-            <span className="font-medium">
-              Week streak achieved! 🎉
+        <div className="mt-4 pt-4 border-t border-gray-700/50">
+          <div className="flex items-center justify-center gap-2 p-3 bg-gradient-to-r from-green-900/30 to-emerald-900/30 border border-green-500/30 rounded-lg">
+            <Award className="h-5 w-5 text-green-400" />
+            <span className="text-sm font-medium text-green-300">
+              Week streak achieved!
             </span>
           </div>
         </div>
