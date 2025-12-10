@@ -7,6 +7,7 @@
     "license": "MIT",
     "scripts": {
         "dev": "next dev",
+        "clean-dev": "taskkill /F /IM node.exe 2>nul & next dev",
         "build": "next build",
         "start": "next start",
         "lint": "next lint",

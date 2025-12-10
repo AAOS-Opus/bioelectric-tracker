@@ -8,15 +8,18 @@ import { Loader2, AlertCircle, CheckCircle, Eye, EyeOff } from 'lucide-react'
 import { useToast } from '@/components/ui/use-toast'
 import { cn } from '@/lib/utils'
 
+// Define password schema separately for reuse in field validation
+const passwordSchema = z.string()
+  .min(8, 'Password must be at least 8 characters')
+  .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+  .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+  .regex(/[0-9]/, 'Password must contain at least one number')
+  .regex(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain at least one special character')
+
 const registerSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
-  password: z.string()
-    .min(8, 'Password must be at least 8 characters')
-    .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
-    .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
-    .regex(/[0-9]/, 'Password must contain at least one number')
-    .regex(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain at least one special character'),
+  password: passwordSchema,
   confirmPassword: z.string()
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",
@@ -101,7 +104,7 @@ export function RegisterForm() {
       } else if (name === 'email') {
         z.string().email('Invalid email address').parse(value)
       } else if (name === 'password') {
-        registerSchema.shape.password.parse(value)
+        passwordSchema.parse(value)
       } else if (name === 'confirmPassword') {
         if (value !== values.password) {
           throw new Error('Passwords do not match')
@@ -112,7 +115,10 @@ export function RegisterForm() {
       if (error instanceof z.ZodError) {
         return error.errors[0]?.message || 'Invalid value'
       }
-      return error.message || 'Invalid value'
+      if (error instanceof Error) {
+        return error.message || 'Invalid value'
+      }
+      return 'Invalid value'
     }
   }
 
@@ -244,7 +250,7 @@ export function RegisterForm() {
   // Check if form is valid
   const isFormValid = values.name && values.email && values.password && values.confirmPassword &&
                       Object.keys(errors).length === 0 &&
-                      passwordStrength && passwordStrength.score >= 4
+                      (passwordStrength?.score ?? 0) >= 4
 
   return (
     <div className="mt-8 space-y-6">

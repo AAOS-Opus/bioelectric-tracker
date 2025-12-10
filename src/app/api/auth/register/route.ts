@@ -10,6 +10,8 @@ export const dynamic = 'force-dynamic';
 export async function POST(req: NextRequest) {
   try {
     const { name, email, password } = await req.json()
+    const cleanEmail = email.toLowerCase().trim()
+
 
     // Validate input
     if (!name || !email || !password) {
@@ -22,7 +24,7 @@ export async function POST(req: NextRequest) {
     await connectDB()
 
     // Check if user already exists
-    const existingUser = await User.findOne({ email })
+    const existingUser = await User.findOne({ email: cleanEmail })
     if (existingUser) {
       return NextResponse.json(
         { message: 'User already exists' },
@@ -36,7 +38,7 @@ export async function POST(req: NextRequest) {
     // Create user
     const user = await User.create({
       name,
-      email,
+      email: cleanEmail,
       password: hashedPassword,
       programStartDate: new Date(),
       currentPhaseNumber: 1
