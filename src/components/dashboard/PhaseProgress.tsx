@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, memo } from 'react';
+import { format } from 'date-fns';
 import { useCurrentPhase } from '@/hooks/useCurrentPhase';
 import { useToast } from '@/components/ui/use-toast';
 
@@ -150,12 +151,12 @@ const PhaseProgress = memo(function PhaseProgress({
         )}
         {phase.startDate && (
           <div className="text-xs mb-1">
-            Started: {new Date(phase.startDate).toLocaleDateString()}
+            Started: {format(new Date(phase.startDate), 'MMM d, yyyy')}
           </div>
         )}
         {phase.endDate && (
           <div className="text-xs mb-1">
-            Ends: {new Date(phase.endDate).toLocaleDateString()}
+            Ends: {format(new Date(phase.endDate), 'MMM d, yyyy')}
           </div>
         )}
         {phase.description && (

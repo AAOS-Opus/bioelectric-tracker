@@ -1,6 +1,7 @@
 "use client";
 
 import { memo, useMemo } from 'react';
+import { format } from 'date-fns';
 import { CurrentPhaseData } from '@/hooks/useCurrentPhase';
 import { FetchError } from '@/lib/fetcher';
 import { Calendar, Target, Zap, AlertCircle, Info, Quote } from 'lucide-react';
@@ -97,7 +98,7 @@ export const CurrentPhaseCard = memo(function CurrentPhaseCard({ data, isLoading
       <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
         <Calendar className="h-4 w-4" />
         <span>
-          {startDate.toLocaleDateString()} - {endDate.toLocaleDateString()}
+          {format(startDate, 'MMM d, yyyy')} - {format(endDate, 'MMM d, yyyy')}
         </span>
       </div>
 
