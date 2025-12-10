@@ -29,6 +29,11 @@
     --input: 215 30% 90%;
     --ring: 215 75% 20%;
     --radius: 0.5rem;
+
+    /* Animation Timing Tokens */
+    --transition-fast: 150ms;
+    --transition-normal: 200ms;
+    --transition-slow: 300ms;
   }
 
   .dark {
