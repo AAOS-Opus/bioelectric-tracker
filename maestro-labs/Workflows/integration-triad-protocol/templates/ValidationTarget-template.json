@@ -1,0 +1,46 @@
+{
+  "project": "[Project Name]",
+  "version": "1.0",
+  "created_by": "Gemini Pro",
+  "date": "[YYYY-MM-DD]",
+  "validation_criteria": {
+    "functional": [
+      {
+        "id": "F-001",
+        "description": "[What must work]",
+        "test_method": "[How to test]",
+        "success_threshold": "[Expected result]"
+      }
+    ],
+    "performance": [
+      {
+        "id": "P-001",
+        "metric": "[Latency/Throughput/etc]",
+        "target": "[Value with units]",
+        "measurement_method": "[How to measure]"
+      }
+    ],
+    "security": [
+      {
+        "id": "S-001",
+        "control": "[Security requirement]",
+        "verification": "[How to verify]"
+      }
+    ],
+    "recovery": [
+      {
+        "id": "R-001",
+        "scenario": "[Failure scenario]",
+        "expected_behavior": "[How system should respond]",
+        "rto": "[Recovery time objective]"
+      }
+    ],
+    "observability": [
+      {
+        "id": "O-001",
+        "requirement": "[What must be visible]",
+        "verification": "[How to confirm visibility]"
+      }
+    ]
+  }
+}
